@@ -8,7 +8,7 @@ This project is an [Open Policy Agent (OPA)](https://github.com/open-policy-agen
 
 ## Pre-requisites
 
-- This plugin requires the [opa-backend](../opa-backend/README.md) plugin to be installed and configured.
+- This plugin requires the [opa-backend](https://github.com/Parsifal-M/backstage-opa-backend#opa-backend) plugin to be installed and configured.
 - This plugin also requires and assumes that you have set up and followed the instructions in the [Backstage Permissions Docs](https://backstage.io/docs/permissions/overview) as it of course relies on the permissions framework to be there and set up.
 
 ## Key Components
