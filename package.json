@@ -78,6 +78,5 @@
   "files": [
     "dist"
   ],
-  "configSchema": "config.d.ts",
   "packageManager": "yarn@4.0.1"
 }
