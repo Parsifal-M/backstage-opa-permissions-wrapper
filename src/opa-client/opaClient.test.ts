@@ -113,4 +113,16 @@ describe('OpaClient', () => {
     };
     await expect(client.evaluatePolicy(mockInput)).rejects.toThrow();
   });
+
+  it('should throw error when fetch throws an error', async () => {
+    mockFetch.mockRejectedValueOnce(new Error('Network error'));
+
+    const client = new OpaClient(mockConfig, mockLogger);
+    const mockInput: PolicyEvaluationInput = {
+      permission: { name: 'read' },
+      identity: { user: 'testUser', claims: ['claim1', 'claim2'] },
+    };
+    await expect(client.evaluatePolicy(mockInput)).rejects.toThrow('Network error');
+    expect(mockLogger.error).toHaveBeenCalledWith('Error during OPA policy evaluation:', expect.objectContaining({ message: 'Network error' }));  });
+
 });
