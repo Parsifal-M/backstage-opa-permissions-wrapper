@@ -16,7 +16,9 @@ export class OpaClient {
     this.logger = logger;
   }
 
-  async evaluatePolicy(input: PolicyEvaluationInput): Promise<PolicyEvaluationResult> {
+  async evaluatePolicy(
+    input: PolicyEvaluationInput,
+  ): Promise<PolicyEvaluationResult> {
     this.logger.info(
       `Sending request to OPA: ${this.baseUrl}/api/opa/opa-permissions`,
     );
@@ -24,18 +26,15 @@ export class OpaClient {
     this.logger.info(`Sending input to OPA: ${JSON.stringify(input)}`);
 
     try {
-      const response = await fetch(
-        `${this.baseUrl}/api/opa/opa-permissions`,
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            policyInput: input,
-          }),
+      const response = await fetch(`${this.baseUrl}/api/opa/opa-permissions`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
         },
-      );
+        body: JSON.stringify({
+          policyInput: input,
+        }),
+      });
 
       if (!response.ok) {
         throw await ResponseError.fromResponse(response);

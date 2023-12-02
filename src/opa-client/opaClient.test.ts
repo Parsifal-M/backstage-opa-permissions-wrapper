@@ -122,7 +122,12 @@ describe('OpaClient', () => {
       permission: { name: 'read' },
       identity: { user: 'testUser', claims: ['claim1', 'claim2'] },
     };
-    await expect(client.evaluatePolicy(mockInput)).rejects.toThrow('Network error');
-    expect(mockLogger.error).toHaveBeenCalledWith('Error during OPA policy evaluation:', expect.objectContaining({ message: 'Network error' }));  });
-
+    await expect(client.evaluatePolicy(mockInput)).rejects.toThrow(
+      'Network error',
+    );
+    expect(mockLogger.error).toHaveBeenCalledWith(
+      'Error during OPA policy evaluation:',
+      expect.objectContaining({ message: 'Network error' }),
+    );
+  });
 });

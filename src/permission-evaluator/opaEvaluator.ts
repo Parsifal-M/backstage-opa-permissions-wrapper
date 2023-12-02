@@ -41,12 +41,14 @@ export const policyEvaluator = (opaClient: OpaClient, logger: Logger) => {
         logger.error('ResourceType is missing for CONDITIONAL decision');
         throw new Error('ResourceType is missing for CONDITIONAL decision');
       }
-    
+
       return {
         result: AuthorizeResult.CONDITIONAL,
         pluginId: response.decision.pluginId,
         resourceType: response.decision.resourceType,
-        conditions: response.decision.conditions as PermissionCriteria<PermissionCondition<string, PermissionRuleParams>>,
+        conditions: response.decision.conditions as PermissionCriteria<
+          PermissionCondition<string, PermissionRuleParams>
+        >,
       };
     }
 
