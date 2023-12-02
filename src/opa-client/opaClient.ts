@@ -1,8 +1,11 @@
 import fetch from 'node-fetch';
 import { Config } from '@backstage/config';
 import { Logger } from 'winston';
-import { PolicyEvaluationInput } from '../types';
+import { PolicyEvaluationInput, PolicyEvaluationResult } from '../types';
 import { ResponseError } from '@backstage/errors';
+
+// NOTE: Something to think about here, we could directly make an API call to OPA on line 28
+// instead of routing through the backend plugin. Something we need to think about.
 
 export class OpaClient {
   private readonly baseUrl: string;
@@ -13,7 +16,7 @@ export class OpaClient {
     this.logger = logger;
   }
 
-  async evaluatePolicy(input: PolicyEvaluationInput): Promise<any> {
+  async evaluatePolicy(input: PolicyEvaluationInput): Promise<PolicyEvaluationResult> {
     this.logger.info(
       `Sending request to OPA: ${this.baseUrl}/api/opa/opa-permissions`,
     );
